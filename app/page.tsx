@@ -140,20 +140,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-zinc-50">
-        <div className="mx-auto max-w-6xl px-6 py-10 text-sm text-zinc-600">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p>© {new Date().getFullYear()} Safety101</p>
-            <div className="flex gap-4">
-              <Link href="/contact" className="hover:text-zinc-900">Contact</Link>
-              <Link href="/pricing" className="hover:text-zinc-900">Pricing</Link>
-              <Link href="/services" className="hover:text-zinc-900">Services</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
