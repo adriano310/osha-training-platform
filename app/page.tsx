@@ -1,6 +1,20 @@
 import Link from "next/link";
+import { services } from "@/lib/servicesData";
 
 export default function Home() {
+  const featuredSlugs = [
+    "osha-10-general-industry",
+    "osha-30-general-industry",
+    "forklift-certification",
+    "lockout-tagout",
+    "haccp-training",
+    "safety-audits",
+  ];
+
+  const featuredServices = services
+    .flatMap((section) => section.items)
+    .filter((item) => featuredSlugs.includes(item.slug));
+
   return (
     <main className="bg-zinc-50">
       {/* Hero */}
@@ -87,21 +101,19 @@ export default function Home() {
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            "Forklift / Powered Industrial Trucks",
-            "Fall Protection",
-            "Hazard Communication (HazCom)",
-            "Confined Space Awareness",
-            "Lockout/Tagout (LOTO)",
-            "First Aid / CPR",
-          ].map((title) => (
-            <div key={title} className="rounded-2xl border bg-white p-6 shadow-sm">
-              <h3 className="text-base font-semibold text-zinc-900">{title}</h3>
+          {featuredServices.map((service) => (
+            <div
+              key={service.slug}
+              className="rounded-2xl border bg-white p-6 shadow-sm hover:shadow-md transition"
+            >
+              <h3 className="text-base font-semibold text-zinc-900">
+                {service.title}
+              </h3>
               <p className="mt-2 text-sm text-zinc-600">
-                On-site training for teams. Request dates and we’ll coordinate.
+                {service.summary}
               </p>
               <Link
-                href="/book-training"
+                href={`/book?service=${service.slug}`}
                 className="mt-4 inline-flex text-sm font-semibold text-zinc-900 hover:text-zinc-600"
               >
                 Request this →
