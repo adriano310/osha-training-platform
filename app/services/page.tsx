@@ -4,9 +4,17 @@ import Link from "next/link";
 export default function ServicesPage() {
   return (
     <div className="px-6 py-16 max-w-6xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8">
+      <h1 className="text-4xl font-bold mb-6">
         Safety & Compliance Training Services
       </h1>
+      <p className="text-lg text-gray-600 max-w-3xl mb-12">
+        We deliver OSHA-aligned, in-person safety training programs designed 
+        to meet real workplace demands. From general industry certification 
+        to equipment safety and compliance consulting, our courses are built 
+        to keep your workforce protected and your operations compliant. Browse our core training 
+        categories below or request a customized program designed specifically for 
+        your team.
+      </p>
 
       {services.map((section) => (
         <div key={section.category} className="mb-16">
@@ -28,10 +36,10 @@ export default function ServicesPage() {
                   {service.summary}
                 </p>
                 <Link
-                  href={`/book?service=${service.slug}`}
+                  href={`/services/${service.slug}`}
                   className="font-medium hover:underline"
                 >
-                  Request this training →
+                  View Details →
                 </Link>
               </div>
             ))}
