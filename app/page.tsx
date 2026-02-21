@@ -113,7 +113,7 @@ export default function Home() {
                 {service.summary}
               </p>
               <Link
-                href={`/book?service=${service.slug}`}
+                href={`/book-training?service=${service.slug}`}
                 className="mt-4 inline-flex text-sm font-semibold text-zinc-900 hover:text-zinc-600"
               >
                 Request this →

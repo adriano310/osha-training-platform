@@ -38,7 +38,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href={`/book?service=${service.slug}`}
+            href={`/book-training?service=${service.slug}`}
             className="inline-flex items-center justify-center rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800 transition"
           >
             Book this training
@@ -129,7 +129,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           ) : null}
 
           <Link
-            href={`/book?service=${service.slug}`}
+            href={`/book-training?service=${service.slug}`}
             className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800 transition"
           >
             Start booking
