@@ -184,7 +184,7 @@ export default function ContactPage() {
                     value={form.phone}
                     onChange={(e) => update("phone", e.target.value)}
                     className="mt-2 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-zinc-400"
-                    placeholder="(555) 123-4567"
+                    placeholder="(555) 555-5555"
                     autoComplete="tel"
                   />
                 </div>
@@ -199,7 +199,7 @@ export default function ContactPage() {
                     value={form.company}
                     onChange={(e) => update("company", e.target.value)}
                     className="mt-2 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-zinc-400"
-                    placeholder="Your company name"
+                    placeholder="Company name"
                     autoComplete="organization"
                   />
                 </div>
@@ -222,7 +222,7 @@ export default function ContactPage() {
                 {/* Topic */}
                 <div className="sm:col-span-1">
                   <label className="text-sm font-medium text-zinc-900" htmlFor="topic">
-                    What can we help with?
+                    Topic
                   </label>
                   <select
                     id="topic"
@@ -230,7 +230,7 @@ export default function ContactPage() {
                     onChange={(e) => update("topic", e.target.value as FormState["topic"])}
                     className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm outline-none focus:border-zinc-400"
                   >
-                    <option value="">Select...</option>
+                    <option value="">Select a topic...</option>
                     <option value="OSHA Training">OSHA Training</option>
                     <option value="Site Audit">Site Audit</option>
                     <option value="Custom Program">Custom Program</option>
@@ -281,7 +281,7 @@ export default function ContactPage() {
                     value={form.message}
                     onChange={(e) => update("message", e.target.value)}
                     className="mt-2 min-h-[140px] w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-zinc-400"
-                    placeholder="Tell us what you’re looking for (topic, # of people, preferred dates, etc.)"
+                    placeholder="Tell us what you're looking for (training topic, group size, preferred dates, etc.)"
                   />
                   {errors.message && <p className="mt-1 text-xs text-zinc-500">{errors.message}</p>}
                 </div>
