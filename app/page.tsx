@@ -18,9 +18,9 @@ export default function Home() {
   return (
     <main className="bg-zinc-50">
       {/* Hero */}
-      <section className="mx-auto max-w-6xl px-6 py-16">
-        <div className="rounded-2xl border bg-white p-10 shadow-sm">
-          <p className="mb-3 inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium text-zinc-700">
+      <section className="bg-gradient-to-b from-[rgba(27,47,88,0.05)] to-white py-20">
+        <div className="mx-auto max-w-6xl px-6 rounded-3xl border border-[rgba(27,42,74,0.15)] bg-white p-10 shadow-md">          
+          <p className="mb-4 inline-flex items-center rounded-full border border-[rgba(27,42,74,0.2)] bg-[rgba(27,42,74,0.06)] px-4 py-2 text-sm font-medium text-[var(--navy)]">
             In-person OSHA training • Simple booking
           </p>
 
@@ -36,13 +36,13 @@ export default function Home() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/book-training"
-              className="inline-flex h-12 items-center justify-center rounded-md bg-black px-5 text-sm font-semibold text-white transition hover:bg-zinc-800"
+              className="inline-flex h-12 items-center justify-center rounded-lg bg-[var(--yellow)] px-6 py-3 font-semibold text-[var(--navy)] transition-colors hover:bg-[var(--yellow-dark)]"
             >
               Book Training
             </Link>
             <Link
               href="/services"
-              className="inline-flex h-12 items-center justify-center rounded-md border border-zinc-300 bg-white px-5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50"
+              className="inline-flex h-12 items-center justify-center rounded-lg border border-[var(--navy)] bg-white px-6 py-3 font-semibold text-[var(--navy)] transition-colors hover:bg-zinc-50"
             >
               View Courses
             </Link>
@@ -51,41 +51,52 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section className="mx-auto max-w-6xl px-6 pb-8">
-        <h2 className="text-xl font-semibold text-zinc-900">How it works</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-3">
-          {[
-            {
-              title: "Request a training",
-              desc: "Choose a course, location, and preferred dates.",
-            },
-            {
-              title: "We confirm details",
-              desc: "An admin reviews your request and schedules an instructor.",
-            },
-            {
-              title: "Train on-site",
-              desc: "Your team gets trained and your records stay organized.",
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-2xl border bg-white p-6 shadow-sm"
-            >
-              <h3 className="text-base font-semibold text-zinc-900">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-zinc-600">{item.desc}</p>
-            </div>
-          ))}
+      <section className="bg-white -mt-10 pt-10 pb-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <h2 className="text-2xl font-semibold text-zinc-900">How it works</h2>
+
+          <div className="mt-6 grid gap-6 sm:grid-cols-3">
+              {[ 
+                {
+                  title: "Request a training",
+                  desc: "Choose a course, location, and preferred dates.",
+                },
+                {
+                  title: "We confirm details",
+                  desc: "An admin reviews your request and schedules an instructor.",
+                },
+                {
+                  title: "Train on-site",
+                  desc: "Your team gets trained and your records stay organized.",
+                },
+              ].map((item, index) => (
+                <div
+                  key={item.title}
+                  className="rounded-3xl border border-[rgba(27,42,74,0.15)] bg-white p-7 shadow-sm transition hover:shadow-md border-l-4 border-l-[var(--navy)]"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(27,42,74,0.25)] bg-white text-sm font-semibold text-[var(--navy)]">
+                      {index + 1}
+                    </span>
+                  
+                    <h3 className="text-base font-semibold text-zinc-900">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  <p className="mt-4 text-sm leading-6 text-[var(--text-muted)]">{item.desc}</p>
+                </div>
+              ))}
+          </div>
         </div>
       </section>
 
       {/* Featured trainings */}
-      <section className="mx-auto max-w-6xl px-6 py-12">
-        <div className="flex items-end justify-between gap-6">
+      <section className="bg-white pt-0 pb-16">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="flex items-end justify-between gap-6">
           <div>
-            <h2 className="text-xl font-semibold text-zinc-900">
+            <h2 className="text-2xl font-semibold text-zinc-900">
               Popular trainings
             </h2>
             <p className="mt-1 text-sm text-zinc-600">
@@ -94,7 +105,7 @@ export default function Home() {
           </div>
           <Link
             href="/services"
-            className="hidden text-sm font-semibold text-zinc-900 hover:text-zinc-600 sm:inline"
+            className="hidden text-md font-semibold text-zinc-900 hover:text-zinc-600 sm:inline"
           >
             See all →
           </Link>
@@ -104,7 +115,7 @@ export default function Home() {
           {featuredServices.map((service) => (
             <div
               key={service.slug}
-              className="rounded-2xl border bg-white p-6 shadow-sm hover:shadow-md transition"
+              className="rounded-3xl border border-[rgba(27,42,74,0.15)] bg-white p-6 shadow-sm hover:shadow-md transition"
             >
               <h3 className="text-base font-semibold text-zinc-900">
                 {service.title}
@@ -120,13 +131,14 @@ export default function Home() {
               </Link>
             </div>
           ))}
+          </div>
         </div>
       </section>
 
       {/* Trust strip */}
-      <section className="border-t bg-white">
-        <div className="mx-auto max-w-6xl px-6 py-10">
-          <div className="grid gap-4 sm:grid-cols-3">
+      <section className="border-t border-b border-[rgba(27,42,74,0.10)] bg-white mb-0">
+        <div className="mx-auto max-w-6xl px-6 py-10 flex justify-center">
+          <div className="grid gap-4 sm:grid-cols-3 w-full text-center">
             {[
               { title: "OSHA-aligned curriculum", desc: "Built around real workplace needs." },
               { title: "In-person instruction", desc: "Hands-on, team-focused training." },
