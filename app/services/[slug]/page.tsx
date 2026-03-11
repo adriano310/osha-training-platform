@@ -39,14 +39,14 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             href={`/book-training?service=${service.slug}`}
-            className="inline-flex items-center justify-center rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800 transition"
+            className="inline-flex items-center justify-center rounded-lg bg-[var(--yellow)] px-4 py-2 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-[var(--yellow-dark)]"
           >
             Book this training
           </Link>
 
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-lg border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold text-zinc-900 hover:bg-zinc-50 transition"
+            className="inline-flex items-center justify-center rounded-lg border border-[var(--navy)] bg-white px-4 py-2 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-zinc-50"
           >
             Request a quote
           </Link>
@@ -130,7 +130,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
           <Link
             href={`/book-training?service=${service.slug}`}
-            className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800 transition"
+            className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-[var(--yellow)] px-4 py-2 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-[var(--yellow-dark)]"
           >
             Start booking
           </Link>

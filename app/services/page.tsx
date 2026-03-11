@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ServicesPage() {
   return (
-    <div className="px-6 py-16 max-w-6xl mx-auto">
+    <div className="px-6 pt-16 pb-6 max-w-6xl mx-auto">
       <h1 className="text-4xl font-bold mb-6">
         Safety & Compliance Training Services
       </h1>
@@ -17,7 +17,7 @@ export default function ServicesPage() {
       </p>
 
       {services.map((section) => (
-        <div key={section.category} className="mb-16">
+        <div key={section.category} className="mb-6">
           <h2 className="text-2xl font-semibold mb-2">
             {section.category}
           </h2>
@@ -27,7 +27,7 @@ export default function ServicesPage() {
             {section.items.map((service) => (
               <div
                 key={service.slug}
-                className="border rounded-xl p-6 hover:shadow-lg transition"
+                className="rounded-3xl border border-[rgba(27,42,74,0.15)] p-6 hover:shadow-lg transition"
               >
                 <h3 className="text-lg font-semibold mb-2">
                   {service.title}

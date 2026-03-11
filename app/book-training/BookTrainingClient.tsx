@@ -126,7 +126,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 
 				<Link
 					href="/services"
-					className="text-sm font-semibold text-zinc-900 hover:text-zinc-600"
+					className="text-md font-semibold text-zinc-900 hover:text-zinc-600"
 				>
 					Browse services →
 				</Link>
@@ -395,7 +395,12 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 									<button
 										type="submit"
 										disabled={!canSubmit}
-										className="inline-flex items-center justify-center rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+										className={[
+											"inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors",
+											canSubmit
+												? "bg-[var(--yellow)] text-[var(--navy)] hover:bg-[var(--yellow-dark)]"
+												: "bg-zinc-200 text-zinc-500 cursor-not-allowed opacity-50",
+										].join(" ")}
 									>
 										Submit request
 									</button>
@@ -411,13 +416,13 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 								<div className="mt-6 flex flex-col gap-3 sm:flex-row">
 									<Link
 										href="/services"
-										className="inline-flex items-center justify-center rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm font-semibold text-zinc-900 hover:bg-zinc-50"
+										className="inline-flex items-center justify-center rounded-lg border border-[var(--navy)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-zinc-50"
 									>
 										Browse services
 									</Link>
 									<button
 										onClick={() => setSubmitted(false)}
-										className="inline-flex items-center justify-center rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-zinc-800"
+										className="inline-flex items-center justify-center rounded-lg bg-[var(--yellow)] px-4 py-2.5 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-[var(--yellow-dark)]"
 									>
 										Submit another request
 									</button>

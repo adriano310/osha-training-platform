@@ -125,12 +125,12 @@ export default function ContactPage() {
             <p className="mt-2 text-sm text-zinc-600">
               If you already know what you need, you can request a training directly.
             </p>
-            <a
-              href="/book-training"
-              className="mt-4 inline-flex items-center justify-center rounded-xl bg-zinc-900 px-4 py-2 text-sm font-semibold text-white hover:bg-zinc-800"
-            >
-              Book training →
-            </a>
+                <a
+                  href="/book-training"
+                  className="mt-4 inline-flex items-center justify-center rounded-lg bg-[var(--yellow)] px-4 py-2 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-[var(--yellow-dark)]"
+                >
+                  Book training →
+                </a>
           </div>
         </aside>
 
@@ -295,9 +295,9 @@ export default function ContactPage() {
                     type="submit"
                     disabled={!canSubmit}
                     className={[
-                      "inline-flex items-center justify-center rounded-xl px-5 py-2 text-sm font-semibold",
+                      "inline-flex items-center justify-center rounded-lg px-5 py-2 text-sm font-semibold transition-colors",
                       canSubmit
-                        ? "bg-zinc-900 text-white hover:bg-zinc-800"
+                        ? "bg-[var(--yellow)] text-[var(--navy)] hover:bg-[var(--yellow-dark)]"
                         : "bg-zinc-200 text-zinc-500 cursor-not-allowed",
                     ].join(" ")}
                   >
@@ -314,7 +314,7 @@ export default function ContactPage() {
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="inline-flex items-center justify-center rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-zinc-800"
+                    className="inline-flex items-center justify-center rounded-lg bg-[var(--yellow)] px-4 py-2.5 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-[var(--yellow-dark)]"
                   >
                     Submit another request
                   </button>
