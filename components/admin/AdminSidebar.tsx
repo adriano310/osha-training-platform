@@ -13,7 +13,10 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden w-72 shrink-0 border-r lg:flex lg:flex-col" style={{ borderColor: 'var(--navy-dark)', background: 'var(--off-white)' }}>
+    <aside
+      className="hidden lg:flex lg:flex-col w-72 shrink-0 border-r h-screen fixed top-0 left-0 z-30"
+      style={{ borderColor: 'var(--navy-dark)', background: 'var(--off-white)' }}
+    >
       <div className="border-b px-6 py-6" style={{ borderColor: 'var(--navy-dark)' }}>
         <Link href="/admin" className="block">
           <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--navy)' }}>
