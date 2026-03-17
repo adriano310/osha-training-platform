@@ -1,6 +1,6 @@
 
 "use client";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 import StatusBadge from "@/components/admin/StatusBadge";
 
@@ -88,6 +88,7 @@ const bookings = [
 
 
 export default function BookingDetailPage() {
+  const router = useRouter();
   const { id } = useParams();
   const booking = bookings.find((b) => b.id === id) || null;
 
@@ -101,6 +102,15 @@ export default function BookingDetailPage() {
 
   return (
     <div className="space-y-6">
+      {/* Back Button */}
+			<button
+				type="button"
+				onClick={() => router.push("/admin/bookings")}
+				className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition"
+			>
+				← Back to Bookings
+			</button>
+
       {/* Header */}
       <section className="flex items-start justify-between">
         <div>

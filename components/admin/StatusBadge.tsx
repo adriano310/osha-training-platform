@@ -19,7 +19,7 @@ const statusStyles: Record<Status, string> = {
   Completed:
     "bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-200",
   Replied:
-    "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-200",
+    "bg-purple-50 text-purple-700 ring-1 ring-inset ring-purple-200",
   Closed: "bg-slate-100 text-slate-700 ring-1 ring-inset ring-slate-200",
 };
 
