@@ -93,8 +93,39 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 		e.preventDefault();
 		if (!canSubmit) return;
 
-		// front-end only. Later: POST to /api/bookings and create a Prisma record.
-		setSubmitted(true);
+		// Map form fields to Booking model
+		const bookingData = {
+			company: form.company,
+			contactName: form.contactName,
+			email: form.email,
+			phone: form.phone,
+			service: selectedService?.name || form.serviceSlug,
+			preferredDate: form.date1,
+			employeeCount: Number(form.trainees),
+			city: form.city,
+			state: form.state,
+			message: form.notes,
+			category: form.category,
+			serviceSlug: form.serviceSlug,
+			locationType: form.locationType,
+			address: form.address,
+			zip: form.zip,
+			timeWindow1: form.timeWindow1,
+			date2: form.date2,
+			timeWindow2: form.timeWindow2,
+		};
+
+		try {
+			const res = await fetch("/api/bookings", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(bookingData),
+			});
+			if (!res.ok) throw new Error("Failed to submit booking");
+			setSubmitted(true);
+		} catch (err) {
+			alert("There was an error submitting your booking. Please try again.");
+		}
 	}
 
 	const searchParams = useSearchParams();
