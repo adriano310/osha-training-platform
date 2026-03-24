@@ -36,14 +36,16 @@ model Booking {
 
 model ContactSubmission {
   id                String   @id @default(cuid())
+  contactCode       String?  @unique
   name              String
   email             String
-  phone             String
-  company           String
-  location          String?
-  topic             String
-  preferredContact  String
+  phone             String? 
+  company           String? 
+  location          String? 
+  topic             String?
+  preferredContact  String  
   message           String
-  status            String   @default("new")
+  additionalNotes   String?
+  status            String   @default("New")
   submittedAt       DateTime @default(now())
 }

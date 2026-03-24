@@ -1,6 +1,19 @@
 "use client";
 
 import { useMemo, useState } from "react";
+// Phone formatting and validation helpers (from BookTrainingClient)
+function formatPhoneInput(value: string) {
+  const digits = value.replace(/\D/g, "");
+  if (digits.length === 0) return "";
+  if (digits.length <= 3) return `(${digits}`;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  if (digits.length <= 10) return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+}
+
+function isValidPhoneNumber(phone: string) {
+  return /^\(\d{3}\) \d{3}-\d{4}$/.test(phone);
+}
 
 
 type FormState = {
@@ -50,13 +63,32 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  function onSubmit(e: React.FormEvent) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setError(null);
     if (Object.keys(errors).length > 0) {
       return;
     }
-    setSubmitted(true);
-    setForm(initialState);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contacts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        throw new Error("Failed to submit. Please try again.");
+      }
+      setSubmitted(true);
+      setForm(initialState);
+    } catch (err: any) {
+      setError(err.message || "Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -182,11 +214,14 @@ export default function ContactPage() {
                   <input
                     id="phone"
                     value={form.phone}
-                    onChange={(e) => update("phone", e.target.value)}
+                    onChange={(e) => update("phone", formatPhoneInput(e.target.value))}
                     className="mt-2 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm outline-none focus:border-zinc-400"
                     placeholder="(555) 555-5555"
                     autoComplete="tel"
                   />
+                  {form.phone.length > 0 && !isValidPhoneNumber(form.phone) && (
+                    <p className="mt-1 text-xs text-zinc-500">Please enter a valid 10-digit phone number.</p>
+                  )}
                 </div>
 
                 {/* Company */}
@@ -293,17 +328,20 @@ export default function ContactPage() {
                   </p>
                   <button
                     type="submit"
-                    disabled={!canSubmit}
+                    disabled={!canSubmit || loading}
                     className={[
                       "inline-flex items-center justify-center rounded-lg px-5 py-2 text-sm font-semibold transition-colors",
-                      canSubmit
+                      canSubmit && !loading
                         ? "bg-[var(--yellow)] text-[var(--navy)] hover:bg-[var(--yellow-dark)]"
                         : "bg-zinc-200 text-zinc-500 cursor-not-allowed",
                     ].join(" ")}
                   >
-                    Send message
+                    {loading ? "Sending..." : "Send message"}
                   </button>
                 </div>
+                {error && (
+                  <p className="mt-2 text-xs text-rose-600">{error}</p>
+                )}
               </form>
             ) : (
               <div className="py-6">

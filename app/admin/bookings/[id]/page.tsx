@@ -202,7 +202,7 @@ export default function BookingDetailPage() {
       <button
         type="button"
         onClick={() => router.push("/admin/bookings")}
-        className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition hover:text-slate-900"
+        className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 transition"
       >
         ← Back to Bookings
       </button>
@@ -328,7 +328,7 @@ export default function BookingDetailPage() {
                   ) : (
                     <button
                       type="button"
-                      className="text-xs font-medium text-slate-500 hover:text-slate-900 px-2 py-1"
+                      className="text-sm font-medium text-slate-500 hover:text-slate-900 px-2 py-1"
                       onClick={handleNotesSave}
                       disabled={notesSaving}
                     >
