@@ -119,10 +119,10 @@ export default function AdminBookingsPage() {
                       key={booking.id}
                       className="border-t border-slate-200 text-sm text-slate-700 transition hover:bg-yellow-50 cursor-pointer"
                       tabIndex={0}
-                      onClick={() => router.push(`/admin/bookings/${booking.id}`)}
+                      onClick={() => router.push(`/admin/bookings/${booking.bookingCode ?? booking.id}`)}
                       onKeyDown={e => {
                         if (e.key === 'Enter' || e.key === ' ') {
-                          router.push(`/admin/bookings/${booking.id}`);
+                          router.push(`/admin/bookings/${booking.bookingCode ?? booking.id}`);
                         }
                       }}
                       aria-label={`View details for booking ${booking.bookingCode ?? booking.id}`}

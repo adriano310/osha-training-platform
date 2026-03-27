@@ -97,14 +97,14 @@ export default function BookingDetailPage() {
       setError(null);
 
       try {
-        const res = await fetch("/api/bookings");
+        const res = await fetch(`/api/bookings/${id}`);
         const data = await res.json();
 
         if (data.success) {
-          const found = data.bookings.find((b: Booking) => b.id === id);
-          setBooking(found || null);
+          setBooking(data.booking);
         } else {
-          setError(data.error || "Failed to fetch booking");
+          setError(data.error || "Booking not found.");
+          setBooking(null);
         }
       } catch (err: any) {
         setError(err.message || "Failed to fetch booking");

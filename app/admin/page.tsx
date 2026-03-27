@@ -1,92 +1,153 @@
 import Link from "next/link";
+import type { ComponentProps } from "react";
 import AdminStatCard from "@/components/admin/AdminStatCard";
 import StatusBadge from "@/components/admin/StatusBadge";
+import prisma from "@/lib/prisma";
 
-const recentBookings = [
-  {
-    id: "BK-1001",
-    company: "Northfield Manufacturing",
-    contactName: "Jane Doe",
-    service: "OSHA 10-Hour Training",
-    preferredDate: "March 18, 2026",
-    status: "New" as const,
-  },
-  {
-    id: "BK-1002",
-    company: "Hudson Valley Logistics",
-    contactName: "Michael Torres",
-    service: "Forklift / Powered Industrial Trucks",
-    preferredDate: "March 21, 2026",
-    status: "In Progress" as const,
-  },
-  {
-    id: "BK-1003",
-    company: "Capital Region Builders",
-    contactName: "Sarah Kim",
-    service: "Fall Protection",
-    preferredDate: "March 25, 2026",
-    status: "Contacted" as const,
-  },
-  {
-    id: "BK-1004",
-    company: "Empire Packaging",
-    contactName: "David Brown",
-    service: "Hazard Communication",
-    preferredDate: "April 2, 2026",
-    status: "Completed" as const,
-  },
-];
+type BadgeStatus = ComponentProps<typeof StatusBadge>["status"];
 
-const recentContacts = [
-  {
-    id: "CT-2001",
-    name: "Alex Carter",
-    company: "Tri-State Fabrication",
-    email: "alex@tristatefab.com",
-    messagePreview: "Looking for custom onsite training for 20 employees.",
-    status: "New" as const,
-  },
-  {
-    id: "CT-2002",
-    name: "Emily Johnson",
-    company: "Riverbend Warehousing",
-    email: "emily@riverbend.com",
-    messagePreview: "Do you offer weekend training sessions?",
-    status: "Replied" as const,
-  },
-  {
-    id: "CT-2003",
-    name: "Chris Lee",
-    company: "Upstate Plant Services",
-    email: "chris@upstateplant.com",
-    messagePreview: "Interested in an audit and gap assessment.",
-    status: "Closed" as const,
-  },
-];
+const statusMap: Record<string, BadgeStatus> = {
+  new: "New",
+  pending: "New",
+  "in progress": "In Progress",
+  contacted: "Contacted",
+  completed: "Completed",
+  replied: "Replied",
+  closed: "Closed",
+};
 
-export default function AdminDashboardPage() {
+function normalizeAdminStatus(value: unknown): BadgeStatus {
+  if (typeof value !== "string") return "New";
+  return statusMap[value.trim().toLowerCase()] ?? "New";
+}
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(date);
+}
+
+function previewMessage(message: string): string {
+  if (message.length <= 70) return message;
+  return `${message.slice(0, 67)}...`;
+}
+
+export default async function AdminDashboardPage() {
+  const now = new Date();
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+
+  const [
+    bookingsThisMonth,
+    pendingBookings,
+    newMessages,
+    completedTrainings,
+    bookingRows,
+    contactRows,
+  ] = await Promise.all([
+    prisma.booking.count({
+      where: {
+        submittedAt: {
+          gte: startOfMonth,
+        },
+      },
+    }),
+    prisma.booking.count({
+      where: {
+        status: {
+          in: ["New", "new", "pending", "In Progress", "in progress", "Contacted", "contacted"],
+        },
+      },
+    }),
+    prisma.contactSubmission.count({
+      where: {
+        status: {
+          in: ["New", "new"],
+        },
+      },
+    }),
+    prisma.booking.count({
+      where: {
+        status: {
+          in: ["Completed", "completed"],
+        },
+      },
+    }),
+    prisma.booking.findMany({
+      orderBy: {
+        submittedAt: "desc",
+      },
+      take: 5,
+      select: {
+        id: true,
+        bookingCode: true,
+        companyName: true,
+        contactName: true,
+        service: true,
+        preferredDate: true,
+        status: true,
+      },
+    }),
+    prisma.contactSubmission.findMany({
+      orderBy: {
+        submittedAt: "desc",
+      },
+      take: 5,
+      select: {
+        id: true,
+        contactCode: true,
+        name: true,
+        company: true,
+        email: true,
+        message: true,
+        status: true,
+      },
+    }),
+  ]);
+
+  const recentBookings = bookingRows.map((booking) => ({
+    id: booking.id,
+    href: `/admin/bookings/${booking.bookingCode ?? booking.id}`,
+    company: booking.companyName,
+    contactName: booking.contactName,
+    service: booking.service,
+    preferredDate: formatDate(booking.preferredDate),
+    status: normalizeAdminStatus(booking.status) as BadgeStatus,
+  }));
+
+  const recentContacts = contactRows.map((contact) => ({
+    id: contact.id,
+    href: `/admin/contacts/${contact.contactCode ?? contact.id}`,
+    name: contact.name,
+    company: contact.company || "No company provided",
+    email: contact.email,
+    messagePreview: previewMessage(contact.message),
+    status: normalizeAdminStatus(contact.status) as BadgeStatus,
+  }));
+
   return (
     <div className="space-y-8">
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <AdminStatCard
-          label="Total Bookings"
-          value={24}
-          helperText="All training requests submitted"
+          label="Bookings This Month"
+          value={bookingsThisMonth}
+          helperText="Requests submitted this month"
         />
         <AdminStatCard
           label="Pending Bookings"
-          value={6}
+          value={pendingBookings}
           helperText="Waiting for follow-up"
         />
         <AdminStatCard
           label="New Messages"
-          value={13}
-          helperText="Recent inquiries from the contact form"
+          value={newMessages}
+          helperText="Unread inquiries from the contact form"
         />
         <AdminStatCard
-          label="Open Inquiries"
-          value={8}
-          helperText="Still needing a response"
+          label="Completed Trainings"
+          value={completedTrainings}
+          helperText="Bookings marked as completed"
         />
       </section>
 
@@ -125,9 +186,14 @@ export default function AdminDashboardPage() {
                 {recentBookings.map((booking) => (
                   <tr
                     key={booking.id}
-                    className="border-t border-slate-200 text-sm text-slate-700"
+                    className="relative border-t border-slate-200 text-sm text-slate-700 transition hover:bg-yellow-50"
                   >
                     <td className="px-5 py-4">
+                      <Link
+                        href={booking.href}
+                        className="absolute inset-0"
+                        aria-label={`View booking for ${booking.company}`}
+                      />
                       <p className="font-medium text-slate-900">
                         {booking.company}
                       </p>
@@ -168,9 +234,10 @@ export default function AdminDashboardPage() {
 
           <div className="divide-y divide-slate-200">
             {recentContacts.map((contact) => (
-              <div
+              <Link
                 key={contact.id}
-                className="flex flex-col gap-3 px-5 py-4 sm:flex-row sm:items-start sm:justify-between"
+                href={contact.href}
+                className="flex flex-col gap-3 px-5 py-4 transition hover:bg-yellow-50 sm:flex-row sm:items-start sm:justify-between"
               >
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
@@ -186,7 +253,7 @@ export default function AdminDashboardPage() {
                     {contact.messagePreview}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
