@@ -238,7 +238,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 												}
 												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
 											>
-												<option value="on_site">At your facility</option>
+												<option value="on_site">On Site</option>
 												<option value="virtual">Virtual / Remote</option>
 											</select>
 										</div>
@@ -493,7 +493,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 							<span className="text-xs text-zinc-500">Delivery</span>
 							<span className="text-sm text-zinc-900 text-right">
 							{form.locationType === "on_site"
-								? "At your facility"
+								? "On Site"
 								: form.locationType === "virtual"
 								? "Virtual / Remote"
 								: "—"}

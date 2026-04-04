@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { sendBookingEmails } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   try {
@@ -50,6 +51,33 @@ export async function POST(req: NextRequest) {
         bookingCode,
       },
     });
+
+    const emailResults = await sendBookingEmails({
+      bookingCode: booking.bookingCode,
+      companyName: booking.companyName,
+      contactName: booking.contactName,
+      email: booking.email,
+      phone: booking.phone,
+      service: booking.service,
+      preferredDate: booking.preferredDate,
+      employeeCount: booking.employeeCount,
+      city: booking.city,
+      state: booking.state,
+      message: booking.message,
+      category: booking.category,
+      locationType: booking.locationType,
+      address: booking.address,
+      zip: booking.zip,
+      timeWindow1: booking.timeWindow1,
+      date2: booking.date2,
+      timeWindow2: booking.timeWindow2,
+      submittedAt: booking.submittedAt,
+    });
+    const failedEmails = emailResults.filter((result) => result.status === "rejected");
+    if (failedEmails.length > 0) {
+      console.error("Booking emails failed", failedEmails);
+    }
+
     return NextResponse.json({ success: true, booking });
   } catch (error: any) {
     return NextResponse.json({ success: false, error: error?.message || "Unknown error" }, { status: 400 });

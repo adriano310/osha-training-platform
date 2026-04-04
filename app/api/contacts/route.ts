@@ -1,3 +1,7 @@
+import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
+import { sendContactEmails } from "@/lib/email";
+
 export async function POST(req: Request) {
   try {
     const data = await req.json();
@@ -33,13 +37,29 @@ export async function POST(req: Request) {
         status: "New",
       },
     });
+
+    const emailResults = await sendContactEmails({
+      contactCode: contact.contactCode,
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+      company: contact.company,
+      location: contact.location,
+      topic: contact.topic,
+      preferredContact: contact.preferredContact,
+      message: contact.message,
+      submittedAt: contact.submittedAt,
+    });
+    const failedEmails = emailResults.filter((result) => result.status === "rejected");
+    if (failedEmails.length > 0) {
+      console.error("Contact emails failed", failedEmails);
+    }
+
     return NextResponse.json(contact, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: "Failed to submit contact." }, { status: 500 });
   }
 }
-import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma";
 
 export async function GET() {
   try {
