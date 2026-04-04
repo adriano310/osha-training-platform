@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { ensureAdminApiAuth } from "@/lib/adminAuth";
 
 export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> | { id: string } }) {
+  const unauthorized = await ensureAdminApiAuth();
+  if (unauthorized) return unauthorized;
+
   const params = 'then' in context.params ? await context.params : context.params;
   const id = params.id;
 
@@ -20,6 +24,9 @@ export async function GET(req: NextRequest, context: { params: Promise<{ id: str
 }
 
 export async function PATCH(req: NextRequest, context: { params: Promise<{ id: string }> | { id: string } }) {
+  const unauthorized = await ensureAdminApiAuth();
+  if (unauthorized) return unauthorized;
+
   const params = 'then' in context.params ? await context.params : context.params;
   const id = params.id;
 

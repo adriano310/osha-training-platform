@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { ensureAdminApiAuth } from "@/lib/adminAuth";
 import { sendContactEmails } from "@/lib/email";
 
 export async function POST(req: Request) {
@@ -63,6 +64,9 @@ export async function POST(req: Request) {
 
 export async function GET() {
   try {
+    const unauthorized = await ensureAdminApiAuth();
+    if (unauthorized) return unauthorized;
+
     const contacts = await prisma.contactSubmission.findMany({
       orderBy: { submittedAt: "desc" },
     });

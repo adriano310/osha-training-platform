@@ -1,8 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { ensureAdminApiAuth } from "@/lib/adminAuth";
+
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : "Unknown error";
+}
 
 export async function GET(req: NextRequest, context: { params: Promise<{ id?: string }> }) {
   try {
+    const unauthorized = await ensureAdminApiAuth();
+    if (unauthorized) return unauthorized;
+
     const { id } = await context.params;
     if (!id) {
       return NextResponse.json({ success: false, error: "Missing booking id in URL." }, { status: 400 });
@@ -19,13 +27,16 @@ export async function GET(req: NextRequest, context: { params: Promise<{ id?: st
       return NextResponse.json({ success: false, error: "Booking not found." }, { status: 404 });
     }
     return NextResponse.json({ success: true, booking });
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error?.message || "Unknown error" }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ success: false, error: getErrorMessage(error) }, { status: 500 });
   }
 }
 
 export async function PATCH(req: NextRequest, context: { params: Promise<{ id?: string }> }) {
   try {
+    const unauthorized = await ensureAdminApiAuth();
+    if (unauthorized) return unauthorized;
+
     const { id } = await context.params;
     if (!id) {
       return NextResponse.json({ success: false, error: "Missing booking id in URL." }, { status: 400 });
@@ -42,7 +53,7 @@ export async function PATCH(req: NextRequest, context: { params: Promise<{ id?: 
       return NextResponse.json({ success: false, error: "Booking not found." }, { status: 404 });
     }
     const body = await req.json();
-    const data: any = {};
+    const data: { status?: string; additionalNotes?: string | null } = {};
     if (body.status !== undefined) data.status = body.status;
     if (body.additionalNotes !== undefined) data.additionalNotes = body.additionalNotes;
     if (Object.keys(data).length === 0) {
@@ -53,7 +64,7 @@ export async function PATCH(req: NextRequest, context: { params: Promise<{ id?: 
       data,
     });
     return NextResponse.json({ success: true, booking: updated });
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error?.message || "Unknown error" }, { status: 400 });
+  } catch (error: unknown) {
+    return NextResponse.json({ success: false, error: getErrorMessage(error) }, { status: 400 });
   }
 }

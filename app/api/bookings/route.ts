@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { ensureAdminApiAuth } from "@/lib/adminAuth";
 import { sendBookingEmails } from "@/lib/email";
+
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : "Unknown error";
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -79,18 +84,21 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ success: true, booking });
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error?.message || "Unknown error" }, { status: 400 });
+  } catch (error: unknown) {
+    return NextResponse.json({ success: false, error: getErrorMessage(error) }, { status: 400 });
   }
 }
 
 export async function GET() {
   try {
+    const unauthorized = await ensureAdminApiAuth();
+    if (unauthorized) return unauthorized;
+
     const bookings = await prisma.booking.findMany({
       orderBy: { submittedAt: "desc" },
     });
     return NextResponse.json({ success: true, bookings });
-  } catch (error: any) {
-    return NextResponse.json({ success: false, error: error?.message || "Unknown error" }, { status: 500 });
+  } catch (error: unknown) {
+    return NextResponse.json({ success: false, error: getErrorMessage(error) }, { status: 500 });
   }
 }

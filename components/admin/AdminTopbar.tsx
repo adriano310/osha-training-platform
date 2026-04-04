@@ -21,9 +21,12 @@ export default function AdminTopbar() {
           <h2 className="text-2xl font-semibold text-slate-900">{title}</h2>
         </div>
 
-        <div className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700">
-          Admin
-        </div>
+        <a
+          href="/admin/logout"
+          className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100"
+        >
+          Log Out
+        </a>
       </div>
     </header>
   );
