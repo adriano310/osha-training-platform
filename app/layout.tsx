@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Safety101",
+  title: "Andrade Safety Consulting",
   description: "OSHA training booking and management platform",
 };
 

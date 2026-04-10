@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="bg-zinc-50">
       {/* Hero */}
-      <section className="bg-gradient-to-b from-[rgba(27,47,88,0.05)] to-white py-20">
+      <section className="bg-gradient-to-b from-[rgba(27,47,88,0.05)] to-white pt-12 pb-20">
         <div className="mx-auto max-w-6xl px-6 rounded-3xl border border-[rgba(27,42,74,0.15)] bg-white p-10 shadow-md">          
           <p className="mb-4 inline-flex items-center rounded-full border border-[rgba(27,42,74,0.2)] bg-[rgba(27,42,74,0.06)] px-4 py-2 text-sm font-medium text-[var(--navy)]">
             In-person OSHA training • Simple booking
@@ -29,7 +29,7 @@ export default function Home() {
           </h1>
 
           <p className="mt-4 max-w-2xl text-lg leading-8 text-zinc-600">
-            Safety101 helps companies request in-person trainings, coordinate schedules,
+            Andrade Safety helps companies request in-person trainings, coordinate schedules,
             and keep everything organized from one place.
           </p>
 

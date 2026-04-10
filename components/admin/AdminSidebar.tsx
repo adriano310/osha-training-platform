@@ -20,7 +20,7 @@ export default function AdminSidebar() {
       <div className="border-b px-6 py-6" style={{ borderColor: 'var(--navy-dark)' }}>
         <Link href="/admin" className="block">
           <p className="text-xs font-semibold uppercase tracking-[0.2em]" style={{ color: 'var(--navy)' }}>
-            Safety101
+            Andrade Safety
           </p>
           <h1 className="mt-2 text-xl font-bold" style={{ color: 'var(--text-dark)' }}>Admin Panel</h1>
         </Link>

@@ -156,7 +156,7 @@ export async function generateMetadata({ params }: PageProps) {
   if (!service) return {};
 
   return {
-    title: `${service.title} | Safety101`,
+    title: `${service.title} | Andrade Safety`,
     description: service.summary,
   };
 }

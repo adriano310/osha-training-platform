@@ -1,23 +1,32 @@
 import Link from "next/link";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+});
 
 export default function Navbar() {
   return (
     <header className="w-full border-b bg-[var(--navy)]">
       <nav className="w-full">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-8 py-5">
+        <div className="relative mx-auto flex max-w-6xl items-center justify-between px-8 py-5">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 text-xl font-semibold tracking-tight">
+        <Link href="/" className="flex shrink-0 items-center gap-2 text-xl font-semibold tracking-tight">
           <img
             src="/Helmet Logo.png"
             alt="Safety Helmet Logo"
             className="h-12 w-auto"
           />
-          <span className="font-bold text-xl text-white">Safety101</span>
+          <span className={`${montserrat.className} flex items-baseline gap-[2px]`}>
+            <span className="text-xl font-semibold tracking-[0.02em] text-white/95">Andrade</span>
+            <span className="text-xl font-bold text-[var(--yellow)]">Safety</span>
+          </span>
         </Link>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-8 text-base font-medium">
+        <div className="absolute left-1/2 hidden -translate-x-1/2 md:flex items-center gap-8 text-base font-medium">
           <Link href="/" className="text-white hover:text-[var(--yellow)] hover:brightness-110 transition-all">
             Home
           </Link>
@@ -32,7 +41,7 @@ export default function Navbar() {
         {/* Button */}
          <Link
            href="/book-training"
-           className="rounded-lg px-5 py-3 text-sm font-semibold transition-colors bg-[var(--yellow)] text-[var(--navy)] hover:bg-[var(--yellow-dark)] hover:shadow-md"
+           className="shrink-0 rounded-lg px-5 py-3 text-sm font-semibold transition-colors bg-[var(--yellow)] text-[var(--navy)] hover:bg-[var(--yellow-dark)] hover:shadow-md"
          >
            Book Training
          </Link>

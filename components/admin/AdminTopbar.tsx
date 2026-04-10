@@ -17,7 +17,7 @@ export default function AdminTopbar() {
     <header className="border-b border-slate-200 bg-white">
       <div className="flex items-center justify-between px-6 py-4 lg:px-8">
         <div>
-          <p className="text-sm text-slate-500">Safety101 Admin</p>
+          <p className="text-sm text-slate-500">Andrade Safety Admin</p>
           <h2 className="text-2xl font-semibold text-slate-900">{title}</h2>
         </div>
 

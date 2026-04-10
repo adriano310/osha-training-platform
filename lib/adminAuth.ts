@@ -2,7 +2,7 @@ import { createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export const ADMIN_AUTH_COOKIE = "safety101_admin_session";
+export const ADMIN_AUTH_COOKIE = "andrade_safety_admin_session";
 
 const SESSION_VERSION = "v1";
 const SESSION_TTL_SECONDS = 60 * 60 * 8;

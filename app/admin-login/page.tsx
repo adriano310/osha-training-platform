@@ -66,7 +66,7 @@ export default async function AdminLoginPage({
     <main className="flex min-h-screen items-center justify-center bg-slate-100 px-4 py-10">
       <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-          Safety101
+          Andrade Safety
         </p>
         <h1 className="mt-2 text-3xl font-bold text-slate-900">Admin Login</h1>
         <p className="mt-2 text-sm text-slate-600">

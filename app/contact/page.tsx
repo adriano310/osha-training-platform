@@ -124,9 +124,9 @@ export default function ContactPage() {
                 </div>
                 <a
                   className="mt-1 inline-block text-sm font-medium text-zinc-900 underline decoration-zinc-300 underline-offset-4 hover:decoration-zinc-500"
-                  href="mailto:info@safety101.com"
+                  href="mailto:info@andradesafety.com"
                 >
-                  info@safety101.com
+                  info@andradesafety.com
                 </a>
               </div>
 
