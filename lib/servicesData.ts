@@ -2,7 +2,7 @@ export const services = [
   {
     category: "OSHA General Industry Training",
     description:
-      "Comprehensive OSHA-authorized training programs designed specifically for manufacturing and general industry environments.",
+      "OSHA-authorized training built for manufacturing and general industry teams, covering essential safety standards and compliance.",
     items: [
       {
         slug: "osha-10-general-industry",
@@ -131,7 +131,7 @@ export const services = [
   {
     category: "Equipment & Operational Safety",
     description:
-      "Hands-on safety training focused on machinery, equipment, and operational compliance within industrial environments.",
+      "Hands-on training focused on machinery, equipment safety, and day-to-day operational compliance.",
     items: [
       {
         slug: "forklift-certification",
@@ -285,7 +285,7 @@ export const services = [
   {
     category: "Food & Manufacturing Compliance",
     description:
-      "Compliance-focused training programs for food production and regulated manufacturing environments.",
+      "Training for food production and regulated manufacturing, focused on compliance, safety standards, and audit readiness.",
     items: [
       {
         slug: "haccp-training",
@@ -472,7 +472,7 @@ export const services = [
   {
     category: "Workplace Safety & Management Programs",
     description:
-      "Strategic safety consulting and leadership development programs to build strong internal safety systems.",
+      "Safety consulting and leadership training designed to strengthen internal processes and build a safer workplace culture.",
     items: [
       {
         slug: "safety-management-systems",

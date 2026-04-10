@@ -1,43 +1,13 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { loginAction } from "./actions";
 import {
   ADMIN_AUTH_COOKIE,
-  createAdminSessionToken,
-  getAdminSessionCookieOptions,
-  isAdminAuthConfigured,
   isAdminSessionTokenValid,
-  verifyAdminPassword,
 } from "@/lib/adminAuth";
 
 type SearchParams = Promise<{ error?: string }>;
-
-async function loginAction(formData: FormData) {
-  "use server";
-
-  const password = formData.get("password");
-
-  if (typeof password !== "string") {
-    redirect("/admin-login?error=invalid");
-  }
-
-  if (!isAdminAuthConfigured()) {
-    redirect("/admin-login?error=not-configured");
-  }
-
-  if (!verifyAdminPassword(password)) {
-    redirect("/admin-login?error=invalid");
-  }
-
-  const cookieStore = await cookies();
-  cookieStore.set(
-    ADMIN_AUTH_COOKIE,
-    createAdminSessionToken(),
-    getAdminSessionCookieOptions(),
-  );
-
-  redirect("/admin");
-}
 
 function getErrorMessage(code?: string): string | null {
   if (!code) return null;

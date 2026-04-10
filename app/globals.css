@@ -6,12 +6,17 @@
   /* Safety color palette */
   --navy:        #1B2A4A;  /* Deep safety blue — primary brand color */
   --navy-dark:   #1f3556;  /* Darker navy for footers, deep sections */
-  --navy-mid:    #243560;  /* Mid-tone for hover states */
   --yellow:      #F5C518;  /* Safety yellow — accent/CTA color */
   --yellow-dark: #D9A800;  /* Hover state for yellow buttons */
+  --yellow-mid:  #F0B800;  /* borders, card accents, icon fills */
+  --yellow-text: #B08A00;  /* small text, labels, eyebrow */
   --off-white:   #F7F8FA;  /* Page background (slightly warm, not pure white) */
   --text-dark:   #111827;  /* Body text */
   --text-muted:  #6B7280;  /* Secondary text */
+  --surface: #ffffff;
+  --border-subtle: rgba(27, 42, 74, 0.15);
+  --hero-tint: rgba(27, 47, 88, 0.05);
+  --yellow-connector: rgba(226, 184, 67, 0.45);
 }
 
 @theme inline {

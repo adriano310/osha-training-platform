@@ -147,17 +147,18 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 
 	return (
 		<main className="mx-auto max-w-6xl px-6 py-12">
-			<div className="flex items-end justify-between gap-6">
-				<div>
-					<h1 className="text-2xl font-semibold text-zinc-900">Book a training</h1>
-					<p className="mt-1 text-sm text-zinc-600">
-						Request a date and we’ll follow up to confirm details.
+			<div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
+				<div className="max-w-3xl">
+					<h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-dark)]">Book a training</h1>
+					<p className="mt-3 text-base sm:text-lg text-[var(--text-muted)]">
+						Tell us about your training needs and preferred dates. We’ll review your request and follow up to 
+						confirm details and schedule your session.
 					</p>
 				</div>
 
 				<Link
 					href="/services"
-					className="text-md font-semibold text-zinc-900 hover:text-zinc-600"
+					className="shrink-0 text-md font-semibold text-[var(--text-dark)] transition-colors hover:text-[var(--yellow-mid)]"
 				>
 					Browse services →
 				</Link>
@@ -166,15 +167,20 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 			<div className="mt-8 grid gap-6 lg:grid-cols-3">
 				{/* Form */}
 				<section className="lg:col-span-2">
-					<div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+					<div className="rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-6 shadow-sm">
 						{!submitted ? (
 							<form onSubmit={onSubmit} className="space-y-8">
 								{/* Service */}
 								<div>
-									<h2 className="text-sm font-semibold text-zinc-900">Training details</h2>
+									<div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+										<h2 className="text-sm font-semibold text-[var(--text-dark)]">Training details</h2>
+										<p className="text-xs text-[var(--text-muted)] sm:text-right">
+											Fields marked <span className="text-rose-600">*</span> are required.
+										</p>
+									</div>
 									<div className="mt-4 grid gap-4 sm:grid-cols-2">
 										<div className="sm:col-span-2">
-											<label className="text-sm font-medium text-zinc-800">Training Area <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Training Area <span className="text-rose-600">*</span></label>
 											<select
 												value={form.category}
 												onChange={e => {
@@ -185,7 +191,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 														serviceSlug: "",
 													}));
 												}}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											>
 												<option value="" disabled>Choose a training area…</option>
 												{categoryList.map(cat => (
@@ -193,16 +199,16 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 												))}
 											</select>
 											{!form.category && (
-												<p className="mt-2 text-xs text-zinc-500">Choose a training area to view available programs.</p>
+												<p className="mt-2 text-xs text-[var(--text-muted)]">Choose a training area to view available programs.</p>
 											)}
 										</div>
 
 										<div className="sm:col-span-2">
-											<label className="text-sm font-medium text-zinc-800">Training Program <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Training Program <span className="text-rose-600">*</span></label>
 											<select
 												value={form.serviceSlug}
 												onChange={e => update("serviceSlug", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 												disabled={!form.category}
 											>
 												<option value="" disabled>Choose a training program…</option>
@@ -211,32 +217,32 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 												))}
 											</select>
 											{form.category && !form.serviceSlug && (
-												<p className="mt-2 text-xs text-zinc-500">Please select a service from this category.</p>
+												<p className="mt-2 text-xs text-[var(--text-muted)]">Please select a service from this category.</p>
 											)}
-											<p className="mt-2 text-xs text-zinc-500">
+											<p className="mt-2 text-xs text-[var(--text-muted)]">
 												Not sure? Pick the closest match — you can adjust later.
 											</p>
 										</div>
 
 										<div>
-											<label className="text-sm font-medium text-zinc-800"># of trainees <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]"># of trainees <span className="text-rose-600">*</span></label>
 											<input
 												type="number"
 												min={1}
 												value={form.trainees}
 												onChange={(e) => update("trainees", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 
 										<div>
-											<label className="text-sm font-medium text-zinc-800">Delivery type <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Delivery type <span className="text-rose-600">*</span></label>
 											<select
 												value={form.locationType}
 												onChange={(e) =>
 													update("locationType", e.target.value as any)
 												}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											>
 												<option value="on_site">On Site</option>
 												<option value="virtual">Virtual / Remote</option>
@@ -247,27 +253,27 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 
 								{/* Date preferences */}
 								<div>
-									<h2 className="text-sm font-semibold text-zinc-900">Preferred Schedule</h2>
-									<p className="mt-1 text-xs text-zinc-500">
+									<h2 className="text-sm font-semibold text-[var(--text-dark)]">Preferred Schedule</h2>
+									<p className="mt-1 text-xs text-[var(--text-muted)]">
 										Add at least one preferred date so we can confirm availability.
 									</p>
 
 									<div className="mt-4 grid gap-4 sm:grid-cols-2">
 										<div>
-											<label className="text-sm font-medium text-zinc-800">Preferred date #1 <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Preferred date #1 <span className="text-rose-600">*</span></label>
 											<input
 												type="date"
 												value={form.date1}
 												onChange={(e) => update("date1", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 										<div>
-											<label className="text-sm font-medium text-zinc-800">Time window <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Time window <span className="text-rose-600">*</span></label>
 											<select
 												value={form.timeWindow1}
 												onChange={(e) => update("timeWindow1", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											>
 												{DEFAULT_TIME_WINDOWS.map((t) => (
 													<option key={t} value={t}>
@@ -278,24 +284,24 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 										</div>
 
 										<div>
-											<label className="text-sm font-medium text-zinc-800">
+											<label className="text-sm font-medium text-[var(--text-dark)]">
 												Preferred date #2
 											</label>
 											<input
 												type="date"
 												value={form.date2}
 												onChange={(e) => update("date2", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 										<div>
-											<label className="text-sm font-medium text-zinc-800">
+											<label className="text-sm font-medium text-[var(--text-dark)]">
 												Time window
 											</label>
 											<select
 												value={form.timeWindow2}
 												onChange={(e) => update("timeWindow2", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											>
 												{DEFAULT_TIME_WINDOWS.map((t) => (
 													<option key={t} value={t}>
@@ -309,108 +315,108 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 
 								{/* Location */}
 								<div>
-									<h2 className="text-sm font-semibold text-zinc-900">Location</h2>
+									<h2 className="text-sm font-semibold text-[var(--text-dark)]">Location</h2>
 									<div className="mt-4 grid gap-4 sm:grid-cols-2">
 										<div className="sm:col-span-2">
-											<label className="text-sm font-medium text-zinc-800">
+											<label className="text-sm font-medium text-[var(--text-dark)]">
 												Address (if applicable)
 											</label>
 											<input
 												value={form.address}
 												onChange={(e) => update("address", e.target.value)}
 												placeholder="Street address"
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 										<div>
-											<label className="text-sm font-medium text-zinc-800">City <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">City <span className="text-rose-600">*</span></label>
 											<input
 												value={form.city}
 												onChange={(e) => update("city", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 										<div>
-											<label className="text-sm font-medium text-zinc-800">State <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">State <span className="text-rose-600">*</span></label>
 											<input
 												value={form.state}
 												onChange={(e) => update("state", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 										<div>
-											<label className="text-sm font-medium text-zinc-800">ZIP</label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">ZIP</label>
 											<input
 												value={form.zip}
 												onChange={(e) => update("zip", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 									</div>
-									<p className="mt-2 text-xs text-zinc-500">
+									<p className="mt-2 text-xs text-[var(--text-muted)]">
 										If you’re not sure yet, leave this blank — we’ll confirm during follow-up.
 									</p>
 								</div>
 
 								{/* Contact */}
 								<div>
-									<h2 className="text-sm font-semibold text-zinc-900">Contact</h2>
+									<h2 className="text-sm font-semibold text-[var(--text-dark)]">Contact</h2>
 									<div className="mt-4 grid gap-4 sm:grid-cols-2">
 										<div>
-											<label className="text-sm font-medium text-zinc-800">Full name <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Full name <span className="text-rose-600">*</span></label>
 											<input
 												value={form.contactName}
 												onChange={(e) => update("contactName", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 												placeholder="Jane Doe"
 											/>
 										</div>
 										<div>
-											<label className="text-sm font-medium text-zinc-800">Email <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Email <span className="text-rose-600">*</span></label>
 											<input
 												value={form.email}
 												onChange={(e) => update("email", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 												placeholder="jane@company.com"
 												type="email"
 											/>
 											   {form.email.length > 0 && !isValidEmail(form.email) && (
-												   <p className="mt-1 text-xs text-zinc-500">
+												   <p className="mt-1 text-xs text-[var(--text-muted)]">
 													   Please enter a valid email address.
 												   </p>
 											   )}
 										</div>
 										<div className="sm:col-span-2">
-											<label className="text-sm font-medium text-zinc-800">Phone</label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Phone</label>
 											<input
 												value={form.phone}
 												onChange={e => update("phone", formatPhoneInput(e.target.value))}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 												placeholder="(555) 555-5555"
 											/>
 											{form.phone.length > 0 && !isValidPhoneNumber(form.phone) && (
-												<p className="mt-1 text-xs text-zinc-500">Please enter a valid 10-digit phone number.</p>
+												<p className="mt-1 text-xs text-[var(--text-muted)]">Please enter a valid 10-digit phone number.</p>
 											)}
 										</div>
 
 										<div className="sm:col-span-2">
-											<label className="text-sm font-medium text-zinc-800">Company / Organization <span className="text-rose-600">*</span></label>
+											<label className="text-sm font-medium text-[var(--text-dark)]">Company / Organization <span className="text-rose-600">*</span></label>
 											<input
 												value={form.company}
 												onChange={(e) => update("company", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 												placeholder="Company name"
 											/>
 										</div>
 
 										<div className="sm:col-span-2">
-											<label className="text-sm font-medium text-zinc-800">
+											<label className="text-sm font-medium text-[var(--text-dark)]">
 												Message
 											</label>
 											<textarea
 												value={form.notes}
 												onChange={(e) => update("notes", e.target.value)}
-												className="mt-2 min-h-[110px] w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:ring-2 focus:ring-zinc-200"
+												className="mt-2 min-h-[110px] w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 												placeholder="Anything we should know? (equipment, language needs, site constraints, etc.)"
 											/>
 										</div>
@@ -419,7 +425,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 
 								{/* Submit */}
 								<div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
-									<p className="text-xs text-zinc-500">
+									<p className="text-xs text-[var(--text-muted)]">
 										By submitting, you’re requesting a booking — we’ll confirm availability by email.
 									</p>
 
@@ -430,7 +436,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 											"inline-flex items-center justify-center rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors",
 											canSubmit
 												? "bg-[var(--yellow)] text-[var(--navy)] hover:bg-[var(--yellow-dark)]"
-												: "bg-zinc-200 text-zinc-500 cursor-not-allowed opacity-50",
+												: "bg-[var(--off-white)] text-[var(--text-muted)] cursor-not-allowed opacity-50",
 										].join(" ")}
 									>
 										Submit request
@@ -439,24 +445,26 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 							</form>
 						) : (
 							<div className="py-6">
-								<h2 className="text-lg font-semibold text-zinc-900">Request received</h2>
-								<p className="mt-2 text-sm text-zinc-600">
-									Thanks — we’ll follow up shortly to confirm availability and finalize details.
+								<h2 className="text-lg font-semibold text-[var(--text-dark)]">Request received</h2>
+								<p className="mt-2 text-sm text-[var(--text-muted)]">
+									Thanks. We’ve received your training request. We’ll review your details and follow 
+									up within 1–2 business days to confirm scheduling and next steps. You’ll receive a 
+									confirmation once your session is scheduled.
 								</p>
 
 								<div className="mt-6 flex flex-col gap-3 sm:flex-row">
-									<Link
-										href="/services"
-										className="inline-flex items-center justify-center rounded-lg border border-[var(--navy)] bg-white px-4 py-2.5 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-zinc-50"
-									>
-										Browse services
-									</Link>
 									<button
 										onClick={() => setSubmitted(false)}
 										className="inline-flex items-center justify-center rounded-lg bg-[var(--yellow)] px-4 py-2.5 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-[var(--yellow-dark)]"
 									>
 										Submit another request
 									</button>
+									<Link
+										href="/services"
+										className="inline-flex items-center justify-center rounded-lg border border-[var(--navy)] bg-[var(--surface)] px-4 py-2.5 text-sm font-semibold text-[var(--navy)] transition-colors hover:bg-[var(--off-white)]"
+									>
+										Browse services
+									</Link>
 								</div>
 							</div>
 						)}
@@ -465,33 +473,33 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 
 				{/* Summary */}
 				<aside className="lg:col-span-1">
-				<div className="sticky top-6 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-					<h2 className="text-sm font-semibold text-zinc-900">Summary</h2>
+				<div className="sticky top-6 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface)] p-6 shadow-sm">
+					<h2 className="text-sm font-semibold text-[var(--text-dark)]">Summary</h2>
 
 					<div className="mt-4 space-y-4">
 					{/* Service */}
 					<div>
-						<p className="text-xs text-zinc-500">Training Program</p>
-						<p className="mt-1 text-sm font-semibold text-zinc-900">
+						<p className="text-xs text-[var(--text-muted)]">Training Program</p>
+						<p className="mt-1 text-sm font-semibold text-[var(--text-dark)]">
 						{selectedService?.name ?? "—"}
 						</p>
 						{selectedService?.duration && (
-						<p className="mt-1 text-xs text-zinc-500">
+						<p className="mt-1 text-xs text-[var(--text-muted)]">
 							Typical duration: {selectedService.duration}
 						</p>
 						)}
 					</div>
 
 					{/* Details */}
-					<div className="border-t border-zinc-100 pt-4">
-						<p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+					<div className="border-t border-[var(--border-subtle)] pt-4">
+						<p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
 						Details
 						</p>
 
 						<div className="mt-3 space-y-2">
 						<div className="flex items-start justify-between gap-4">
-							<span className="text-xs text-zinc-500">Delivery</span>
-							<span className="text-sm text-zinc-900 text-right">
+							<span className="text-xs text-[var(--text-muted)]">Delivery</span>
+							<span className="text-sm text-[var(--text-dark)] text-right">
 							{form.locationType === "on_site"
 								? "On Site"
 								: form.locationType === "virtual"
@@ -501,8 +509,8 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 						</div>
 
 						<div className="flex items-start justify-between gap-4">
-							<span className="text-xs text-zinc-500">Group size</span>
-							<span className="text-sm font-semibold text-zinc-900 text-right">
+							<span className="text-xs text-[var(--text-muted)]">Group size</span>
+							<span className="text-sm font-semibold text-[var(--text-dark)] text-right">
 							{Number(form.trainees) === 1 ? "1 trainee" : `${form.trainees} trainees`}
 							</span>
 						</div>
@@ -510,15 +518,15 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 					</div>
 
 					{/* Schedule */}
-					<div className="border-t border-zinc-100 pt-4">
-						<p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+					<div className="border-t border-[var(--border-subtle)] pt-4">
+						<p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
 						Schedule
 						</p>
 
 						<div className="mt-3 space-y-2">
 						<div className="flex items-start justify-between gap-4">
-							<span className="text-xs text-zinc-500">Preference #1</span>
-							<span className="text-sm text-zinc-900 text-right">
+							<span className="text-xs text-[var(--text-muted)]">Preference #1</span>
+							<span className="text-sm text-[var(--text-dark)] text-right">
 								{form.date1 ? (
 									<>
 										<span>{formatDate(form.date1)}</span><br />
@@ -529,8 +537,8 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 						</div>
 
 						<div className="flex items-start justify-between gap-4">
-							<span className="text-xs text-zinc-500">Preference #2</span>
-							<span className="text-sm text-zinc-900 text-right">
+							<span className="text-xs text-[var(--text-muted)]">Preference #2</span>
+							<span className="text-sm text-[var(--text-dark)] text-right">
 								{form.date2 ? (
 									<>
 										<span>{formatDate(form.date2)}</span><br />
@@ -543,15 +551,15 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 					</div>
 
 					{/* Location + Contact */}
-					<div className="border-t border-zinc-100 pt-4">
-						<p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">
+					<div className="border-t border-[var(--border-subtle)] pt-4">
+						<p className="text-xs font-semibold uppercase tracking-wide text-[var(--text-muted)]">
 						Contact
 						</p>
 
 						<div className="mt-3 space-y-2">
 						<div className="flex items-start justify-between gap-4">
-							<span className="text-xs text-zinc-500">Location</span>
-							<span className="text-sm text-zinc-900 text-right">
+							<span className="text-xs text-[var(--text-muted)]">Location</span>
+							<span className="text-sm text-[var(--text-dark)] text-right">
 							{form.city || form.state
 								? `${form.city}${form.city && form.state ? ", " : ""}${form.state}`
 								: "—"}
@@ -559,25 +567,25 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 						</div>
 
 						<div className="flex items-start justify-between gap-4">
-							<span className="text-xs text-zinc-500">Company</span>
-							<span className="text-sm text-zinc-900 text-right">
-							{form.company || "—"}
-							</span>
-						</div>
-
-						<div className="flex items-start justify-between gap-4">
-							<span className="text-xs text-zinc-500">Contact</span>
+							<span className="text-xs text-[var(--text-muted)]">Contact</span>
 
 							<div className="text-right">
-								<p className="text-sm text-zinc-900">
+								<p className="text-sm text-[var(--text-dark)]">
 								{form.contactName || "—"}
 								</p>
 
-								<p className="text-sm text-zinc-900">
-								{form.email || ""}
+								<p className="text-sm text-[var(--text-dark)]">
+								{form.email || "—"}
 								</p>
 							</div>
-							</div>
+						</div>
+
+						<div className="flex items-start justify-between gap-4">
+							<span className="text-xs text-[var(--text-muted)]">Company</span>
+							<span className="text-sm text-[var(--text-dark)] text-right">
+							{form.company || "—"}
+							</span>
+						</div>
 						</div>
 					</div>
 					</div>
