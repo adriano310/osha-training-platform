@@ -11,9 +11,16 @@ Clients can browse available trainings and submit booking requests, while admini
 
 ## Tech Stack
 - **Frontend:** Next.js, React, TypeScript, Tailwind CSS
-- **Backend:** Next.js API Routes
+- **Backend:** Next.js App Router + Route Handlers
 - **Database:** PostgreSQL with Prisma ORM
-- **Authentication:** NextAuth.js
+- **Authentication:** Custom admin cookie session auth
+
+## Vercel Deployment Checklist
+1. Create a hosted PostgreSQL database such as Vercel Postgres, Neon, or Supabase.
+2. Add the environment variables from `.env.example` to your Vercel project.
+3. Run `npm install` and `npm run build` locally to verify the app before pushing.
+4. For a fresh hosted database, run `npx prisma db push` once to sync the schema.
+5. Deploy the repository to Vercel and test the booking form, contact form, and admin login.
 
 ## Milestones
 - **End of February:** Core client pages and navigation
