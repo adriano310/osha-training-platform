@@ -1,4 +1,5 @@
 
+import { Suspense } from "react";
 import servicesData from "@/lib/servicesData";
 import BookTrainingClient from "./BookTrainingClient";
 
@@ -13,5 +14,11 @@ const flatServices = servicesData.flatMap((category) =>
 );
 
 export default function BookTrainingPage() {
-  return <BookTrainingClient services={flatServices}  />;
+  return (
+    <Suspense
+      fallback={<main className="mx-auto max-w-6xl px-6 py-12 text-slate-600">Loading booking form...</main>}
+    >
+      <BookTrainingClient services={flatServices} />
+    </Suspense>
+  );
 }
