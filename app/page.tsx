@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="bg-[var(--off-white)]">
       {/* Hero */}
-      <section className="bg-gradient-to-b from-[var(--hero-tint)] to-[var(--surface)] pt-12 pb-16">
+      <section className="bg-gradient-to-b from-[var(--hero-tint)] to-[var(--surface)] pt-4 pb-16 sm:pt-12">
         <div className="mx-auto max-w-6xl rounded-3xl border border-[var(--border-subtle)] bg-[var(--surface)] p-10 shadow-md sm:p-12">
           <h1 className="text-4xl font-semibold tracking-tight text-[var(--text-dark)] sm:text-5xl">
             Book on-site OSHA training for your team.

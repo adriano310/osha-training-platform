@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --background: #F7F8FA;
+  --foreground: #111827;
   /* Safety color palette */
   --navy:        #1B2A4A;  /* Deep safety blue — primary brand color */
   --navy-dark:   #1f3556;  /* Darker navy for footers, deep sections */
@@ -26,14 +27,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--background);
 }
 
 body {
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;

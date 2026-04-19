@@ -265,7 +265,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 												type="date"
 												value={form.date1}
 												onChange={(e) => update("date1", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
+												className="mt-2 block w-full min-w-0 max-w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 										<div>
@@ -273,7 +273,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 											<select
 												value={form.timeWindow1}
 												onChange={(e) => update("timeWindow1", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
+												className="mt-2 block w-full min-w-0 max-w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											>
 												{DEFAULT_TIME_WINDOWS.map((t) => (
 													<option key={t} value={t}>
@@ -291,7 +291,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 												type="date"
 												value={form.date2}
 												onChange={(e) => update("date2", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
+												className="mt-2 block w-full min-w-0 max-w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											/>
 										</div>
 										<div>
@@ -301,7 +301,7 @@ export default function BookTrainingClient({ services }: BookTrainingClientProps
 											<select
 												value={form.timeWindow2}
 												onChange={(e) => update("timeWindow2", e.target.value)}
-												className="mt-2 w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
+												className="mt-2 block w-full min-w-0 max-w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--surface)] px-3 py-2 text-sm text-[var(--text-dark)] outline-none focus:ring-2 focus:ring-[var(--border-subtle)]"
 											>
 												{DEFAULT_TIME_WINDOWS.map((t) => (
 													<option key={t} value={t}>
