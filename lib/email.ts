@@ -115,12 +115,12 @@ export async function sendContactEmails(
   const userText = [
     `Hi ${payload.name},`,
     "",
-    "Thanks for contacting Safety 101.",
+    "Thanks for contacting Andrade Safety.",
     `Your reference code is ${code} and we received your request on ${formatDate(payload.submittedAt)}.`,
     "",
     "We will follow up as soon as possible.",
     "",
-    "Safety 101 Team",
+    "Andrade Safety Team",
   ].join("\n");
 
   const adminSubject = `New contact submission ${code}`;
@@ -166,13 +166,13 @@ export async function sendBookingEmails(
   const userText = [
     `Hi ${payload.contactName},`,
     "",
-    "Thanks for booking training with Safety 101.",
+    "Thanks for booking training with Andrade Safety.",
     `Your booking reference code is ${code}.`,
     `Preferred date: ${formatDate(payload.preferredDate)}.`,
     "",
     "We will contact you shortly to confirm availability.",
     "",
-    "Safety 101 Team",
+    "Andrade Safety Team",
   ].join("\n");
 
   const adminSubject = `New booking submission ${code}`;
